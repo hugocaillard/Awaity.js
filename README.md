@@ -40,7 +40,7 @@ console.log(tasks) // [{...}, {...}, {...}]
 const promise = api.getTasks();
 const titles  = await map(promise, (task) => task.title);
 
-// Resolve an array of a promises 
+// Resolve an array of a promises
 const promisesArray = [ api.getTask(1), api.getTask(2), api.getTask(3)];
 const titles = await map(promisesArray, (task) => task.title);
 
@@ -167,7 +167,7 @@ const postsWithComments = await Promise.resolve([1,2,3])
 ```
 
 ### Using `flow`
-Flow is a utility to support 
+Flow is a utility to support
 
 ```js
 
@@ -190,11 +190,11 @@ const postsWithComments = await flow([1,2,3], [
 import { map, flow } from 'awaity/fp';
 
 const postsWithComments = await flow([
-    map(ids, (id) => api.getPostById(id)),
-    map(posts, async (post) => ({
+    map(api.getPostById, ids),
+    map(async (post) => ({
       ...post,
       comments: await api.getCommentsByPostId(post.id)
-    })
+    }, posts)
 ], [1,2,3]);
 ```
 
